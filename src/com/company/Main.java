@@ -18,11 +18,19 @@ public class Main {
             listaHilos.add((new Thread(new HiloCalculosVector(i+1,listaVectores.get(i)))));
 
         }
-
-
-
         for (int i = 0; i < listaHilos.size(); i++) {
             listaHilos.get(i).start();
+        }
+        try{
+            Thread.sleep(10);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        for(Thread hilo : listaHilos){
+        if(hilo.isAlive()){
+            hilo.interrupt();
+        }
         }
 
 

@@ -12,8 +12,13 @@ public class HiloCalculosVector implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(String.format("El hilo %s tiene media: %f máximo: %d y minimo: %d",
-                id, calculoMedia(), calculoMaximo(), calculoMinimo()));
+        if (!Thread.currentThread().isInterrupted()){
+            System.out.println(String.format("El hilo %s tiene media: %f máximo: %d y minimo: %d",
+                    id, calculoMedia(), calculoMaximo(), calculoMinimo()));
+        }else{
+            System.out.println(String.format("El hilo %s ha sido interrumpido", this.id));
+        }
+
 
     }
 
