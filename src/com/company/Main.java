@@ -18,7 +18,7 @@ public class Main {
             listaHilos.add((new Thread(new HiloCalculosVector(i+1,listaVectores.get(i)))));
 
         }
-        Thread.sleep(100);
+
 
 
         for (int i = 0; i < listaHilos.size(); i++) {
