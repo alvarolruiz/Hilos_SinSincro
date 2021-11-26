@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Main {
 
-    private static final int NUMERO_VECTORES = 20;
+    private static final int NUMERO_VECTORES = 60;
     private static final int TAMANO_VECTOR = 1000000;
     private static final int RANGO_NUMEROS = 10000;
     public static List <int[]> listaVectores= generarListaVectores();
@@ -16,13 +16,12 @@ public class Main {
 
         for (int i = 0; i <listaVectores.size() ; i++) {
             listaHilos.add((new Thread(new HiloCalculosVector(i+1,listaVectores.get(i)))));
+        }
+        establecerPriority();
 
-        }
-        for (int i = 0; i < listaHilos.size(); i++) {
-            listaHilos.get(i).start();
-        }
+
         try{
-            Thread.sleep(10);
+            Thread.sleep(1000);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -51,5 +50,23 @@ public class Main {
             listaVectores.add(generarVectorAleatorio());
         }
         return listaVectores;
+    }
+    
+    public static void establecerPriority(){
+        for(int i = 0; i < listaHilos.size(); i++){
+            if(i<20) {
+                listaHilos.get(i).setPriority(Thread.MAX_PRIORITY);
+            }else if(i<40){
+                listaHilos.get(i).setPriority(Thread.NORM_PRIORITY);
+            }else{
+                listaHilos.get(i).setPriority(Thread.MIN_PRIORITY);
+            }
+        }
+    }
+
+    public static void iniciarHilos(){
+        for (int i = 0; i < listaHilos.size(); i++) {
+            listaHilos.get(i).start();
+        }
     }
 }
